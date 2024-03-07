@@ -1,18 +1,25 @@
 import { ApplicationConfig, isDevMode } from '@angular/core';
-import { provideIonicAngular } from '@ionic/angular/standalone';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { appRoutes } from './app.routes';
+
+import {INJECTABLES, routes} from './app.routes';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import {provideHttpClient, withFetch} from "@angular/common/http";
+import {AuthEffects, authReducer} from "~challenge/auth-state";
+import {LocationEffects, locationReducer} from "~challenge/location-state";
+import {ErrorEffects} from "~challenge/error-state";
+import { QuoteEffects, quoteReducer } from '@c3030x24/quote';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-     provideRouter(appRoutes),
-     provideIonicAngular({}),
-    // provideEffects(AuthEffects, LocationEffects, ErrorEffects),
-    // provideStore({location: locationReducer, auth: authReducer}),
-     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-     provideHttpClient(withFetch()),
-    // ...INJECTABLES
+    provideRouter(routes),
+    provideIonicAngular({}),
+    provideEffects(AuthEffects, LocationEffects, ErrorEffects, QuoteEffects),
+    provideStore({location: locationReducer, auth: authReducer, quote: quoteReducer}),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideHttpClient(withFetch()),
+    ...INJECTABLES
   ]
 };

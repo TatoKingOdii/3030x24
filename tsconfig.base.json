@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@c3030x24/quote": ["libs/state/quote/src/index.ts"],
+      "~challenge/auth-state": ["libs/state/auth-state/src/index.ts"],
+      "~challenge/cats": ["libs/cats/src/index.ts"],
+      "~challenge/error-state": ["libs/state/error-state/src/index.ts"],
+      "~challenge/location-state": ["libs/state/location-state/src/index.ts"],
+      "~challenge/types": ["libs/types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
